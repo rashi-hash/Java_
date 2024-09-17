@@ -1,0 +1,144 @@
+public class MetroTest {
+    public static void main(String[] args) {
+
+        Ticket ticket = new Ticket("One-Way", "Station A", "Station B", 3.00f);
+        MetroCard metroCard = new MetroCard("123456789", 15.00f);
+        RouteMap routeMap = new RouteMap("Central Line", "Maps of all stations on the Central Line");
+
+        Person john = new Person("Rashi");
+
+        john.takeMetro(ticket, metroCard, routeMap);
+    }
+}
+
+class Ticket {
+    private String type;
+    private String fromStation;
+    private String toStation;
+    private float price;
+    
+    public Ticket(String type, String fromStation, String toStation, float price) {
+        this.type = type;
+        this.fromStation = fromStation;
+        this.toStation = toStation;
+        this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Ticket [type=" + type + ", fromStation=" + fromStation + ", toStation=" + toStation + ", price=" + price + "]";
+    }
+    
+    public String getType() 
+    { 
+    	return type;
+    	}
+    public void setType(String type)
+    { 
+    	this.type = type;
+    	}
+    public String getFromStation()
+    { 
+    	return fromStation;
+    	}
+    public void setFromStation(String fromStation)
+    { 
+    	this.fromStation = fromStation;
+    	}
+    public String getToStation()
+    { 
+    	return toStation;
+    	}
+    public void setToStation(String toStation)
+    { 
+    	this.toStation = toStation;
+    	}
+    public float getPrice() 
+    {
+    	return price;
+    	}
+    public void setPrice(float price) 
+    { 
+    	this.price = price;
+    	}
+}
+
+class MetroCard {
+    private String cardNumber;
+    private float balance;
+    
+    public MetroCard(String cardNumber, float balance) {
+        this.cardNumber = cardNumber;
+        this.balance = balance;
+    }
+
+    @Override
+    public String toString() {
+        return "MetroCard [cardNumber=" + cardNumber + ", balance=" + balance + "]";
+    }
+    
+    public String getCardNumber()
+    { 
+    	return cardNumber; 
+    	}
+    public void setCardNumber(String cardNumber) 
+    { 
+    	this.cardNumber = cardNumber; 
+    	}
+    public float getBalance()
+    {
+    	return balance;
+    	}
+    public void setBalance(float balance)
+    { 
+    	this.balance = balance;
+    	}
+}
+
+class RouteMap {
+    private String lineName;
+    private String description;
+    
+    public RouteMap(String lineName, String description) {
+        this.lineName = lineName;
+        this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "RouteMap [lineName=" + lineName + ", description=" + description + "]";
+    }
+    
+    public String getLineName() 
+    { 
+    	return lineName;
+    	}
+    public void setLineName(String lineName) 
+    {
+    	this.lineName = lineName;
+    	
+    }
+    public String getDescription()
+    {
+    	return description;
+    	}
+    public void setDescription(String description)
+    { 
+    	this.description = description; 
+    	}
+}
+
+class Person {
+    private String name;
+    
+    public Person(String name) {
+        this.name = name;
+    }
+
+    void takeMetro(Ticket ticket, MetroCard metroCard, RouteMap routeMap) {
+        System.out.println(name + " is taking the metro:");
+        System.out.println("> Using ticket: " + ticket.toString());
+        System.out.println("> MetroCard details: " + metroCard.toString());
+        System.out.println("> Following route: " + routeMap.toString());
+    }
+}
