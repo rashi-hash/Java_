@@ -1,13 +1,14 @@
 public class MetroTest {
     public static void main(String[] args) {
-
         Ticket ticket = new Ticket("One-Way", "Station A", "Station B", 3.00f);
         MetroCard metroCard = new MetroCard("123456789", 15.00f);
         RouteMap routeMap = new RouteMap("Central Line", "Maps of all stations on the Central Line");
-
-        Person john = new Person("Rashi");
-
-        john.takeMetro(ticket, metroCard, routeMap);
+        
+        AadharCard aadharCard = new AadharCard("1234-5678-9123");
+        Person john = new Person("Rashi", aadharCard, ticket, metroCard, routeMap);
+        
+        john.takeMetro();
+        john.showIdentity();
     }
 }
 
@@ -26,41 +27,17 @@ class Ticket {
 
     @Override
     public String toString() {
-        return "Ticket [type=" + type + ", fromStation=" + fromStation + ", toStation=" + toStation + ", price=" + price + "]";
+        return "Ticket type=" + type + ", from station=" + fromStation + ", to station=" + toStation + ", price=" + price;
     }
     
-    public String getType() 
-    { 
-    	return type;
-    	}
-    public void setType(String type)
-    { 
-    	this.type = type;
-    	}
-    public String getFromStation()
-    { 
-    	return fromStation;
-    	}
-    public void setFromStation(String fromStation)
-    { 
-    	this.fromStation = fromStation;
-    	}
-    public String getToStation()
-    { 
-    	return toStation;
-    	}
-    public void setToStation(String toStation)
-    { 
-    	this.toStation = toStation;
-    	}
-    public float getPrice() 
-    {
-    	return price;
-    	}
-    public void setPrice(float price) 
-    { 
-    	this.price = price;
-    	}
+    public String getType() { return type; }
+    public void setType(String type) { this.type = type; }
+    public String getFromStation() { return fromStation; }
+    public void setFromStation(String fromStation) { this.fromStation = fromStation; }
+    public String getToStation() { return toStation; }
+    public void setToStation(String toStation) { this.toStation = toStation; }
+    public float getPrice() { return price; }
+    public void setPrice(float price) { this.price = price; }
 }
 
 class MetroCard {
@@ -74,25 +51,13 @@ class MetroCard {
 
     @Override
     public String toString() {
-        return "MetroCard [cardNumber=" + cardNumber + ", balance=" + balance + "]";
+        return "MetroCard cardNumber=" + cardNumber + ", balance=" + balance;
     }
     
-    public String getCardNumber()
-    { 
-    	return cardNumber; 
-    	}
-    public void setCardNumber(String cardNumber) 
-    { 
-    	this.cardNumber = cardNumber; 
-    	}
-    public float getBalance()
-    {
-    	return balance;
-    	}
-    public void setBalance(float balance)
-    { 
-    	this.balance = balance;
-    	}
+    public String getCardNumber() { return cardNumber; }
+    public void setCardNumber(String cardNumber) { this.cardNumber = cardNumber; }
+    public float getBalance() { return balance; }
+    public void setBalance(float balance) { this.balance = balance; }
 }
 
 class RouteMap {
@@ -106,39 +71,77 @@ class RouteMap {
 
     @Override
     public String toString() {
-        return "RouteMap [lineName=" + lineName + ", description=" + description + "]";
+        return "RouteMap lineName=" + lineName + ", description=" + description;
     }
     
-    public String getLineName() 
-    { 
-    	return lineName;
-    	}
-    public void setLineName(String lineName) 
-    {
-    	this.lineName = lineName;
-    	
-    }
-    public String getDescription()
-    {
-    	return description;
-    	}
-    public void setDescription(String description)
-    { 
-    	this.description = description; 
-    	}
+    public String getLineName() { return lineName; }
+    public void setLineName(String lineName) { this.lineName = lineName; }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 }
 
-class Person {
+class AadharCard {
+    private String aadharNumber;
+    
+    public AadharCard(String aadharNumber) {
+        this.aadharNumber = aadharNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "AadharCard number=" + aadharNumber;
+    }
+    
+    public String getAadharNumber() { return aadharNumber; }
+    public void setAadharNumber(String aadharNumber) { this.aadharNumber = aadharNumber; }
+}
+
+class MetroUser {
     private String name;
     
-    public Person(String name) {
+    public MetroUser(String name) {
         this.name = name;
     }
 
-    void takeMetro(Ticket ticket, MetroCard metroCard, RouteMap routeMap) {
-        System.out.println(name + " is taking the metro:");
-        System.out.println("> Using ticket: " + ticket.toString());
-        System.out.println("> MetroCard details: " + metroCard.toString());
-        System.out.println("> Following route: " + routeMap.toString());
+    public void showIdentity() {
+        System.out.println("MetroUser name: " + name);
     }
+    
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+}
+
+class Person extends MetroUser {
+    private AadharCard aadharCard;
+    private Ticket ticket;
+    private MetroCard metroCard;
+    private RouteMap routeMap;
+    
+    public Person(String name, AadharCard aadharCard, Ticket ticket, MetroCard metroCard, RouteMap routeMap) {
+        super(name);
+        this.aadharCard = aadharCard;
+        this.ticket = ticket;
+        this.metroCard = metroCard;
+        this.routeMap = routeMap;
+    }
+
+    void takeMetro() {
+        System.out.println(getName() + " is taking the metro:");
+        System.out.println("Ticket: " + ticket.toString());
+        System.out.println("MetroCard details: " + metroCard.toString());
+        System.out.println("Following route: " + routeMap.toString());
+        System.out.println("Aadhar card: " + aadharCard.toString());
+    }
+    
+    public AadharCard getAadharCard() { return aadharCard; }
+    public void setAadharCard(AadharCard aadharCard) { this.aadharCard = aadharCard; }
+    
+    public Ticket getTicket() { return ticket; }
+    public void setTicket(Ticket ticket) { this.ticket = ticket; }
+    
+    public MetroCard getMetroCard() { return metroCard; }
+    public void setMetroCard(MetroCard metroCard) { this.metroCard = metroCard; }
+    
+    public RouteMap getRouteMap() { return routeMap; }
+    public void setRouteMap(RouteMap routeMap) { this.routeMap = routeMap; }
 }
